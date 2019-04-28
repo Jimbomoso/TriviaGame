@@ -1,19 +1,14 @@
 .container {
-    
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+#quiz {
     margin-top: 100px;
-}
-
-#gameTitle {
-    font-size: 60px;
     text-align: center;
-}
-
-#timer {
-    font-size: 30px;
-    text-align: center;
-}
-
-#question {
-    font-size: 20px;
-    margin-left: 25%;
+    line-height: 2;
+    padding: 10px;
 }
