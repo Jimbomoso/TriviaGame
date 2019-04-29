@@ -72,11 +72,17 @@ function askQuestion(){
   choiceD.innerHTML = q.choiceD;
 }
 
+$("#start").click(startGame);
+
+// start function
+function startGame() { 
+
 start.style.display = "none";
 askQuestion();
 quiz.style.display = "block";
 renderCounter();
 TIMER = setInterval(renderCounter, 1000);
+}
 
 
 // timer
@@ -98,12 +104,39 @@ function renderCounter() {
   }
 }
 
+function checkAnswer(answer){
+  if(answer === questions[runningQuestion].correct) {
+    score++;
+    answerIsCorrect();
+  } else {
+    answerIsWrong();
+  }
+  count = 0;
+  if(runningQuestion < lastQuestion) {
+    runningQuestion++;
+    askQuestion();
+  } else {
+    clearInterval(TIMER);
+    calcScore();
+  }
+}
+
+function answerIsCorrect() {
+  document.getElementById(runningQuestion).style.backgroundColor = "red";
+}
+
+function answerIsWrong() {
+  document.getElementById(runningQuestion).style.backgroundColor = "blue";
+}
+
 // score
 function calcScore() {
   scoreDiv.style.display = "block";
 
   const scorePercent = Math.round(100* score/questions.length);
 
-  scoreDiv.innerHTML = "<img src" + img +">";
   scoreDiv.innerHTML += "<p>" + scorePercent +"%</p>";
 }
+
+
+
