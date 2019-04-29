@@ -15,21 +15,31 @@
     </head>
     
     <body>
-        
-        <header>
-            <div class="container">
-                <div id="gameTitle">
-                    <h1> Trivia Game </h1>
+
+        <div id="container"> 
+            <div id="start"> Start Quiz! </div>
+            
+            <div id="quiz" style="display: none">        
+                <div id="question"> <p> question </p></div>
+                
+                <div id="choices">
+                    <div class="choice" id="A" onclick="checkAnswer('A')"></div>
+                    <div class="choice" id="B" onclick="checkAnswer('B')"></div>
+                    <div class="choice" id="C" onclick="checkAnswer('C')"></div>
+                    <div class="choice" id="D" onclick="checkAnswer('D')"></div>
                 </div>
+
+                <div id="timer">
+                        <div id="counter"></div>
+                        <div id="btimeGauge"></div>
+                        <div id="timeGauge"></div>
+                </div>
+
+                <div id="score" style="display: none"></div>
+
             </div>
-        </header>
-        
-        <section>
-            <div class="container">
-                <div id="quiz"></div>
-                <button id="submit">Submit</button>
-                <div id="results"></div>
-        </section>
+
+        </div>
 
         
         <!-- links to jquery and javascript -->

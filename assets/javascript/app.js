@@ -1,105 +1,109 @@
-(function() {
-  function buildQuiz() {
-    // place to store the HTML output
-    const output = [];
+//select elements
 
-    // for each question
-    myQuestions.forEach((currentQuestion, questionNumber) => {
-      //store the list of answer choices
-      const answers = [];
+const start = document.getElementById("start");
 
-      // for each answer
-      for (letter in currentQuestion.answers) {
-        // add radio button
-        answers.push(
-          `<label>
-            <input type="radio" name="question${questionNumber}" value="${letter}">
-            ${letter} :
-            ${currentQuestion.answers[letter]}
-          </label>`
-        );
-      }
+const quiz = document.getElementById("quiz");
 
-      // add this question and answers to the output
-      output.push(
-        `<div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join("")} </div>`
-      );
-    });
+const question = document.getElementById("question");
 
-    // combine our output list into string of HTML and put it on the page
-    quizContainer.innerHTML = output.join("");
+const counter = document.getElementById("counter");
+
+const timeGauge = document.getElementById("timeGauge");
+
+const choiceA = document.getElementById("A");
+
+const choiceB = document.getElementById("B");
+
+const choiceC = document.getElementById("C");
+
+const choiceD = document.getElementById("D");
+
+// array of questions
+let questions = [
+  // question objects
+  {
+    question: "What is the question?",
+    choiceA: "choice A",
+    choiceB: "choice B",
+    choiceC: "choice C",
+    choiceD: "choice D",
+    correct: "A"
+  },
+
+  {
+    question: "What is question 2?",
+    imgSrc: "img2.jpg",
+    choiceA: "choice E",
+    choiceB: "choice F",
+    choiceC: "choice G",
+    choiceD: "choice H",
+    correct: "C"
+  },
+  {
+    question: "What is question 3?",
+    imgSrc: "img2.jpg",
+    choiceA: "choice E",
+    choiceB: "choice F",
+    choiceC: "choice G",
+    choiceD: "choice H",
+    correct: "C"
   }
+];
 
-  function showResults() {
-    // gather answer containers from quiz
-    const answerContainers = quizContainer.querySelectorAll(".answers");
+// main variables
 
-    // keep track of user answers
-    let numCorrect = 0;
+let lastQuestion = questions.length -1;
+let runningQuestion = 0;
+let count = 10;
+const questionTime = 0;
+const gaugeWidth = 150;
+const gaugeUnit = gaugeWidth/questionTime;
+let TIMER;
+let score = 0;
 
-    // for each question...
-    myQuestions.forEach((currentQuestion, questionNumber) => {
-      // find selected answer
-      const answerContainer = answerContainers[questionNumber];
-      const selector = `input[name=question${questionNumber}]:checked`;
-      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
 
-      // if answer is correct
-      if (userAnswer === currentQuestion.correctAnswer) {
-        // add to the number of correct answers
-        numCorrect++;
+// ask question
+function askQuestion(){
+  let q = questions[runningQuestion];
+  question.innerHTML = "<p>" + q.question + "</p>";
+  choiceA.innerHTML = q.choiceA;
+  choiceB.innerHTML = q.choiceB;
+  choiceC.innerHTML = q.choiceC;
+  choiceD.innerHTML = q.choiceD;
+}
 
-        // color the answers green
-        answerContainers[questionNumber].style.color = "lightgreen";
-      } else {
-        // if answer is wrong or blank
-        // color the answers red
-        answerContainers[questionNumber].style.color = "red";
-      }
-    });
+start.style.display = "none";
+askQuestion();
+quiz.style.display = "block";
+renderCounter();
+TIMER = setInterval(renderCounter, 1000);
 
-    // show number of correct answers out of total
-    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+
+// timer
+function renderCounter() {
+  if(count >= questionTime) {
+    counter.innerHTML = count;
+    timeGauge.style.width = count * gaugeUnit + "px";
+    count--
+  } else {
+    count = 0;
+    answerIsWrong();
+    if(runningQuestion < lastQuestion) {
+      runningQuestion++;
+      askQuestion();
+    } else {
+      clearInterval(TIMER);
+      calcScore();
+    }
   }
+}
 
-  const quizContainer = document.getElementById("quiz");
-  const resultsContainer = document.getElementById("results");
-  const submitButton = document.getElementById("submit");
-  const myQuestions = [
-    {
-      question: "In the Disney film Pinocchio, what is the name of the giant whale?",
-      answers: {
-        a: "Figaro",
-        b: "Mangiafuoco",
-        c: "Monstro"
-      },
-      correctAnswer: "a"
-    },
+// score
+function calcScore() {
+  scoreDiv.style.display = "block";
 
-    {
-        question: "What is the most abundant chemical element in the Universe?",
-        answers: {
-          a: "Oxygen",
-          b: "Hydrogen",
-          c: "Nitrogen"
-      },
-      correctAnswer: "b"
-    },
-    {
-        question: "What countries soliders guard the Pope?",
-        answers: {
-          a: "Switzerland",
-          b: "Italy",
-          c: "France",
-        },
-        correctAnswer: "a"
-    },
-    ];
+  const scorePercent = Math.round(100* score/questions.length);
 
-  // display quiz
-  buildQuiz();
-
-  // on submit, show results
-  submitButton.addEventListener("click", showResults);
-})();
+  scoreDiv.innerHTML = "<img src" + img +">";
+  scoreDiv.innerHTML += "<p>" + scorePercent +"%</p>";
+}
