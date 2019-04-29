@@ -6,7 +6,7 @@ body{
 #container{
     margin : 20px auto;
     margin-top: 150px;
-    background-color: white;
+    background-color: black;
     height: 600px;
     width : 960px;
     border-radius: 5px;
@@ -30,8 +30,8 @@ body{
     padding: 10px;
 }
 #start:hover{
-    border: 3px solid lightseagreen;
-    color : lightseagreen;
+    border: 3px solid lawngreen;
+    color : lawngreen;
 }
 
 #question{
