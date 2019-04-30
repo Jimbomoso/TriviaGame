@@ -16,8 +16,6 @@ const choiceB = document.getElementById("B");
 
 const choiceC = document.getElementById("C");
 
-const choiceD = document.getElementById("D");
-
 // array of questions
 let questions = [
   // question objects
@@ -26,26 +24,22 @@ let questions = [
     choiceA: "choice A",
     choiceB: "choice B",
     choiceC: "choice C",
-    choiceD: "choice D",
     correct: "A"
   },
 
   {
     question: "What is question 2?",
-    imgSrc: "img2.jpg",
     choiceA: "choice E",
     choiceB: "choice F",
     choiceC: "choice G",
-    choiceD: "choice H",
     correct: "C"
   },
+  
   {
     question: "What is question 3?",
-    imgSrc: "img2.jpg",
     choiceA: "choice E",
     choiceB: "choice F",
     choiceC: "choice G",
-    choiceD: "choice H",
     correct: "C"
   }
 ];
@@ -54,12 +48,15 @@ let questions = [
 
 let lastQuestion = questions.length -1;
 let runningQuestion = 0;
-let count = 10;
+let count = 5;
 const questionTime = 0;
 const gaugeWidth = 150;
 const gaugeUnit = gaugeWidth/questionTime;
 let TIMER;
 let score = 0;
+
+var drums = new Audio("drums.mp3.mp3");
+
 
 
 // ask question
@@ -69,14 +66,12 @@ function askQuestion(){
   choiceA.innerHTML = q.choiceA;
   choiceB.innerHTML = q.choiceB;
   choiceC.innerHTML = q.choiceC;
-  choiceD.innerHTML = q.choiceD;
 }
 
 $("#start").click(startGame);
 
 // start function
 function startGame() { 
-
 start.style.display = "none";
 askQuestion();
 quiz.style.display = "block";
@@ -87,6 +82,7 @@ TIMER = setInterval(renderCounter, 1000);
 
 // timer
 function renderCounter() {
+  drums.play();
   if(count >= questionTime) {
     counter.innerHTML = count;
     timeGauge.style.width = count * gaugeUnit + "px";

@@ -12,6 +12,7 @@ body{
     border-radius: 5px;
     box-shadow: 0px 5px 15px 0px;
     position: relative;
+    color: white;
 }
 #start{
     font-size: 1.5em;
@@ -37,28 +38,31 @@ body{
 #question{
     width:500px;
     height : 125px;
-    position: absolute;
-    right:0;
-    top:0;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    
 }
 #question p{
-    margin : 0;
     padding : 15px;
-    font-size: 1.25em;
+    font-size: 1.25em; 
+    margin-top: 100px;
 }
 
 #choices{
     width : 480px;
-    position: absolute;
-    right : 0;
     top : 125px;
-    padding : 10px
+    padding : 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
 }
 .choice{
     display: inline-block;
     width : 135px;
     text-align: center;
-    border : 1px solid grey;
+    border: 1px solid grey;
     border-radius: 5px;
     cursor: pointer;
     padding : 5px;
