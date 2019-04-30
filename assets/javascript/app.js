@@ -8,7 +8,7 @@ const question = document.getElementById("question");
 
 const counter = document.getElementById("counter");
 
-const timeGauge = document.getElementById("timeGauge");
+const scoreDiv = document.getElementById("scoreContainer");
 
 const choiceA = document.getElementById("A");
 
@@ -29,17 +29,41 @@ let questions = [
 
   {
     question: "What is question 2?",
-    choiceA: "choice E",
-    choiceB: "choice F",
-    choiceC: "choice G",
+    choiceA: "choice A",
+    choiceB: "choice B",
+    choiceC: "choice C",
+    correct: "B"
+  },
+
+  {
+    question: "What is question 3?",
+    choiceA: "choice A",
+    choiceB: "choice B",
+    choiceC: "choice C",
     correct: "C"
   },
   
   {
+    question: "What is the question?",
+    choiceA: "choice A",
+    choiceB: "choice B",
+    choiceC: "choice C",
+    correct: "A"
+  },
+
+  {
+    question: "What is question 2?",
+    choiceA: "choice A",
+    choiceB: "choice B",
+    choiceC: "choice C",
+    correct: "B"
+  },
+
+  {
     question: "What is question 3?",
-    choiceA: "choice E",
-    choiceB: "choice F",
-    choiceC: "choice G",
+    choiceA: "choice A",
+    choiceB: "choice B",
+    choiceC: "choice C",
     correct: "C"
   }
 ];
@@ -48,19 +72,14 @@ let questions = [
 
 let lastQuestion = questions.length -1;
 let runningQuestion = 0;
-let count = 5;
+let count = 6;
 const questionTime = 0;
-const gaugeWidth = 150;
-const gaugeUnit = gaugeWidth/questionTime;
 let TIMER;
 let score = 0;
-
-var drums = new Audio("drums.mp3.mp3");
-
-
+var drums = new Audio("drums.mp3");
 
 // ask question
-function askQuestion(){
+function askQuestion() {
   let q = questions[runningQuestion];
   question.innerHTML = "<p>" + q.question + "</p>";
   choiceA.innerHTML = q.choiceA;
@@ -80,36 +99,29 @@ TIMER = setInterval(renderCounter, 1000);
 }
 
 
-// timer
+// counter
 function renderCounter() {
-  drums.play();
-  if(count >= questionTime) {
+  if(count > questionTime) {
     counter.innerHTML = count;
-    timeGauge.style.width = count * gaugeUnit + "px";
     count--
+    drums.play();
   } else {
-    count = 0;
-    answerIsWrong();
-    if(runningQuestion < lastQuestion) {
-      runningQuestion++;
-      askQuestion();
-    } else {
-      clearInterval(TIMER);
-      calcScore();
-    }
+    counter.innerHTML = count;
+    drums.pause();
+    drums.currentTime = 0;
   }
 }
 
 function checkAnswer(answer){
   if(answer === questions[runningQuestion].correct) {
     score++;
-    answerIsCorrect();
-  } else {
-    answerIsWrong();
-  }
-  count = 0;
-  if(runningQuestion < lastQuestion) {
+    calcScore();
     runningQuestion++;
+    count = 6;
+    renderCounter();
+    askQuestion();
+  } else if (runningQuestion < lastQuestion) {
+    renderCounter();
     askQuestion();
   } else {
     clearInterval(TIMER);
@@ -117,17 +129,12 @@ function checkAnswer(answer){
   }
 }
 
-function answerIsCorrect() {
-  document.getElementById(runningQuestion).style.backgroundColor = "red";
-}
-
-function answerIsWrong() {
-  document.getElementById(runningQuestion).style.backgroundColor = "blue";
-}
 
 // score
 function calcScore() {
   scoreDiv.style.display = "block";
+
+  $("#scoreContainer").empty();
 
   const scorePercent = Math.round(100* score/questions.length);
 

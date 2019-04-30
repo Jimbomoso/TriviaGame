@@ -6,7 +6,9 @@ body{
 #container{
     margin : 20px auto;
     margin-top: 150px;
-    background-color: black;
+    /* background-image: url("https://imgix.bustle.com/uploads/image/2018/12/18/dc990bc3-5c87-46a7-858e-71e6a51cdf5a-iron-throne.jpg?w=1020&h=574&fit=crop&crop=faces&auto=format&q=70"); */
+    /* background-size: cover; */
+    background-color: #111111;
     height: 600px;
     width : 960px;
     border-radius: 5px;
@@ -28,7 +30,10 @@ body{
     top:50px;
     color : lightgrey;
     margin-top: 150px;
-    padding: 10px;
+}
+
+#start p{
+    padding: 30px;
 }
 #start:hover{
     border: 3px solid lawngreen;
@@ -82,48 +87,29 @@ body{
 #counter{
     font-size: 3em;
 }
-#btimeGauge{
-    width : 150px;
-    height : 10px;
-    border-radius: 10px;
-    background-color: lightgray;
-    margin-left : 25px;
-}
-#timeGauge{
-    height : 10px;
-    border-radius: 10px;
-    background-color: mediumseagreen;
-    margin-top : -10px;
-    margin-left : 25px;
-}
 
 #scoreContainer{
-    margin : 20px auto;
-    background-color: white;
+    margin : 0 auto;
+    margin-top: 40px;
+    background-color: black;
     opacity: 0.8;
-    height: 300px;
-    width : 700px;
-    border-radius: 5px;
-    box-shadow: 0px 5px 15px 0px;
-    position: relative;
+    height: 100px;
+    width : 100px;
+    border-radius: 25px;
+    box-shadow: 0px 5px 25px 0px;
+    text-align: center;
     display: none;
+    color: green;
 }
-#scoreContainer img{
-    position: absolute;
-    top:100px;
-    left:325px;
-}
+
 #scoreContainer p{
-    position: absolute;
-    display: block;
-    width : 59px;
-    height :59px;
-    top:130px;
-    left:325px;
     font-size: 1.5em;
     font-weight: bold;
-    text-align: center;
-}
+    color: green;
+    opacity: 0.8;
+    margin: 0 auto;
+    padding: 30px;
+
 
 
 
