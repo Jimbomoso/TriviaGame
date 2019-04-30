@@ -1,20 +1,21 @@
 body{
     font-size: 20px;
     font-family: monospace;
+     background-image: url("https://timedotcom.files.wordpress.com/2017/07/blackwater_f.jpg"); 
+     background-size: cover;
 }
 
 #container{
     margin : 20px auto;
     margin-top: 150px;
-    /* background-image: url("https://imgix.bustle.com/uploads/image/2018/12/18/dc990bc3-5c87-46a7-858e-71e6a51cdf5a-iron-throne.jpg?w=1020&h=574&fit=crop&crop=faces&auto=format&q=70"); */
-    /* background-size: cover; */
+   
     background-color: #111111;
     height: 600px;
     width : 960px;
     border-radius: 5px;
-    box-shadow: 0px 5px 15px 0px;
+    box-shadow: 0px 5px 75px 0px;
     position: relative;
-    color: white;
+    color: orange;
 }
 #start{
     font-size: 1.5em;
@@ -29,7 +30,7 @@ body{
     left:300px;
     top:50px;
     color : lightgrey;
-    margin-top: 150px;
+    margin-top: 200px;
 }
 
 #start p{
@@ -37,6 +38,7 @@ body{
 }
 #start:hover{
     border: 3px solid lawngreen;
+    box-shadow: 0px 5px 75px 0px;
     color : lawngreen;
 }
 
@@ -53,6 +55,8 @@ body{
     padding : 15px;
     font-size: 1.25em; 
     margin-top: 100px;
+    color: lawngreen;
+    opacity: 0.8;
 }
 
 #choices{
@@ -78,14 +82,16 @@ body{
 }
 
 #timer{
-    position: absolute;
     height : 100px;
     width : 200px;
     bottom : 0px;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 #counter{
     font-size: 3em;
+    margin-top: 100px;
 }
 
 #scoreContainer{

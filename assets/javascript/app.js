@@ -20,11 +20,11 @@ const choiceC = document.getElementById("C");
 let questions = [
   // question objects
   {
-    question: "What is the question?",
-    choiceA: "choice A",
-    choiceB: "choice B",
-    choiceC: "choice C",
-    correct: "A"
+    question: "How did Daenerys hatch her dragon eggs?",
+    choiceA: "By keeping them warm",
+    choiceB: "On a funeral pyre",
+    choiceC: "By peeling them open",
+    correct: "B"
   },
 
   {
@@ -44,7 +44,7 @@ let questions = [
   },
   
   {
-    question: "What is the question?",
+    question: "What is the question 4?",
     choiceA: "choice A",
     choiceB: "choice B",
     choiceC: "choice C",
@@ -52,7 +52,7 @@ let questions = [
   },
 
   {
-    question: "What is question 2?",
+    question: "What is question 5?",
     choiceA: "choice A",
     choiceB: "choice B",
     choiceC: "choice C",
@@ -60,7 +60,7 @@ let questions = [
   },
 
   {
-    question: "What is question 3?",
+    question: "What is question 6?",
     choiceA: "choice A",
     choiceB: "choice B",
     choiceC: "choice C",
@@ -98,6 +98,13 @@ renderCounter();
 TIMER = setInterval(renderCounter, 1000);
 }
 
+// end game
+function endGame() {
+question.innerHTML = "<p>" + "Gameover" + "</p>";
+choices.style.display = "none";
+timer.style.display = "none";
+}
+
 
 // counter
 function renderCounter() {
@@ -109,11 +116,14 @@ function renderCounter() {
     counter.innerHTML = count;
     drums.pause();
     drums.currentTime = 0;
+    runningQuestion++;
+    checkAnswer();
   }
 }
 
 function checkAnswer(answer){
   if(answer === questions[runningQuestion].correct) {
+    drums.pause();
     score++;
     calcScore();
     runningQuestion++;
@@ -121,9 +131,13 @@ function checkAnswer(answer){
     renderCounter();
     askQuestion();
   } else if (runningQuestion < lastQuestion) {
+    calcScore();
+    runningQuestion++;
+    count = 6;
     renderCounter();
     askQuestion();
   } else {
+    endGame();
     clearInterval(TIMER);
     calcScore();
   }
