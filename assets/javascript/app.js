@@ -63,10 +63,10 @@ let questions = [
 
   {
     question: "Who was king before Robert Baratheon?",
-    choiceA: "Aerys Targaryan",
+    choiceA: "Eddard Stark",
     choiceB: "Tywin Lannister",
-    choiceC: "Eddard Stark",
-    correct: "A"
+    choiceC: "Aerys Targaryan",
+    correct: "C"
   }
 ];
 
@@ -143,7 +143,7 @@ function renderCounter() {
 }
 
 function checkAnswer(answer){
-  if(answer === questions[runningQuestion].correct) {
+  if ((runningQuestion < lastQuestion) && (answer === questions[runningQuestion].correct)) {
     drums.pause();
     wine.play();
     score += 10;
@@ -152,6 +152,10 @@ function checkAnswer(answer){
     count = 6;
     renderCounter();
     askQuestion();
+  } else if ((runningQuestion === lastQuestion) && (answer === questions[runningQuestion].correct)) {
+    score += 10;
+    calcScore();
+    endGame();
   } else if (runningQuestion < lastQuestion) {
     wrong.play();
     calcScore();
